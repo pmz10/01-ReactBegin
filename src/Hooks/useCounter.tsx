@@ -1,18 +1,24 @@
-import { useState } from "react";
+import { useState } from "react"
 
-const useCounter = () => {
-    const [count, setCount] = useState<number>(10);
-
-    const increseaBy = (value: number) => {
-      setCount(count + value);
-    }
-  return {
-    //Propperties
-    count, 
-
-    //Methods
-    increseaBy,
-  }
+interface Options {
+  initialValue: number;
 }
 
-export default useCounter;
+export const useCounter = ({ initialValue = 0 }: Options) => {
+
+  const [count, setCount] = useState<number>(initialValue);
+
+  const increaseBy = (value: number) => {
+    const newValue = count + value;
+    if (newValue < 0) return;
+
+      setCount(count + value);
+  }
+  return {
+    //Properti
+    count,
+    //Métodos
+    increaseBy
+
+  }
+} 
